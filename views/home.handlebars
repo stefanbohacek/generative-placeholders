@@ -146,6 +146,20 @@
       <a href="https://glitch.com/about">Glitch</a>
     </li>
   </ul>
+  <h2>Questions and tips</h2>
+  <ul>
+    <li>
+      <p><strong>When using multiple images on the same page, how do I make each look different?</strong></p>
+      <p>When a browser sees the same URL again, it tries to load the resource (image, JavaScript or a CSS file, etc) from the browser's cache, avoiding making the same request again.</p>
+      <p>To make each image random, you can add an extra parameter that will be ignored by this site, but will make your browser think you are requesting a new image. This can be anything, for example:</p>
+      <pre>
+        <code class="html">&#x3C;img src=&#x22;https://generative-placeholders.glitch.me/image?width=400&#x26;height=300&#x26;img=01&#x22;&#x3E;</code>
+        <code class="html">&#x3C;img src=&#x22;https://generative-placeholders.glitch.me/image?width=400&#x26;height=300&#x26;img=02&#x22;&#x3E;</code>
+        <code class="html">&#x3C;img src=&#x22;https://generative-placeholders.glitch.me/image?width=400&#x26;height=300&#x26;img=03&#x22;&#x3E;</code>
+      </pre>
+    </li>
+  </ul>
+  <p>Have any more questions or suggestions? Feel free to reach out <a href="mailto:stefan@fourtonfish.com">via email</a> or <a href="https://twitter.com/fourtonfish">on Twitter</a>!</p>
   <div class="mt-5">
     <p>
       Created by <a href="https://twitter.com/fourtonfish">@fourtonfish</a>
