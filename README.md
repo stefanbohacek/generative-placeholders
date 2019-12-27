@@ -4,11 +4,4 @@
 
 Use generative art for your placeholder images.
 
-
-# Resources
-
-- [Generative Artistry](https://generativeartistry.com)
-- [Generative Art Bot](https://glitch.com/edit/#!/generative-art-bot)
-- [Cellular Automata in the Browser](https://javascript.christmas/2019/22)
-- [nice-color-palettes](https://www.npmjs.com/package/nice-color-palettes)
-- [Glitch](https://glitch.com/about)
+Visit the project page for [examples and instructions](https://generative-placeholders.glitch.me/).
