@@ -7,8 +7,13 @@ document.addEventListener( 'DOMContentLoaded', function(event){
   examples.forEach( function( example ){
     example.addEventListener( 'click', function( event ){
       event.preventDefault();
-      console.log( this );
-      this.src = this.src + '&'; 
+      let dataSrc = this.dataset.src;
+      if ( dataSrc ){
+        this.src = dataSrc;         
+        this.dataset.src = '';
+      } else {
+        this.src = this.src + '&'; 
+      }
       return false;
     } );
   } )
