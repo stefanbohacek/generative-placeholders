@@ -12,7 +12,8 @@ const express = require( 'express' ),
         cubic_disarray: require(__dirname + '/../generators/cubic-disarray.js'),
         joy_division: require(__dirname + '/../generators/joy-division.js'),
         triangular_mesh: require(__dirname + '/../generators/triangular-mesh.js'),
-        un_deux_trois: require(__dirname + '/../generators/un-deux-trois.js')
+        un_deux_trois: require(__dirname + '/../generators/un-deux-trois.js'),
+        mondrian: require(__dirname + '/../generators/mondrian.js')        
       };
 
 function serveImage( res, error, img ){
@@ -105,6 +106,12 @@ router.get( '/', function ( req, res )  {
     } );
   } else if ( options.style === '123' ){
     generators.un_deux_trois( options, function( error, img ){
+      serveImage( res, error, img );
+    } );    
+  } else if ( options.style === 'mondrian' ){
+    options.colors = ['#D40920', '#1356A2', '#F7D842'];
+
+    generators.mondrian( options, function( error, img ){
       serveImage( res, error, img );
     } );    
   }
