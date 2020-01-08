@@ -7,10 +7,10 @@ document.addEventListener( 'DOMContentLoaded', function(event){
   examples.forEach( function( example ){
     example.addEventListener( 'click', function( event ){
       event.preventDefault();
-      let dataSrc = this.dataset.src;
+      let dataSrc = this.dataset.imgsrc;
       if ( dataSrc ){
         this.src = dataSrc;         
-        this.dataset.src = '';
+        this.dataset.imgsrc = '';
       } else {
         this.src = this.src + '&'; 
       }

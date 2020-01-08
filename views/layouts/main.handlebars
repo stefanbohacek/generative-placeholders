@@ -19,8 +19,10 @@
   <!--[if lt IE 9]>
   <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->  
-  <link rel="stylesheet" href="https://{{project_name}}.glitch.me/libs/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="https://{{project_name}}.glitch.me/css/styles.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://{{project_name}}.glitch.me/libs/bootstrap/bootstrap.min.css" type="text/css">
+  <link href="https://{{project_name}}.glitch.me/libs/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://{{project_name}}.glitch.me/css/styles.css" type="text/css">
+  <link href="https://{{project_name}}.glitch.me/css/styles.css" rel="stylesheet" type="text/css">
   <!-- TODO: Use favicon-generator.org to create favicons. -->
   <!--
   <link rel="shortcut icon" href="TODO:URL"/>
@@ -41,7 +43,8 @@
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
-  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:900|Roboto|Source+Code+Pro&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css?family=Playfair+Display:900|Roboto|Source+Code+Pro&display=swap" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:900|Roboto|Source+Code+Pro&display=swap" rel="stylesheet" type="text/css">
 </head>
 <body>
   <main id="app">
@@ -53,10 +56,11 @@
   <div class="container-fluid">
   {{> footer }}
   </div>  
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/styles/monokai-sublime.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/styles/monokai-sublime.min.css" type="text/css">
+  <link href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/styles/monokai-sublime.min.css" rel="stylesheet" type="text/css">
   <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
   <!-- <script src="https://{{project_name}}.glitch.me/js/helpers.js"></script> -->
+  <script src="https://{{project_name}}.glitch.me/js/lazy-load-images.js"></script>
   <script src="https://{{project_name}}.glitch.me/js/scripts.js"></script>
   {{> statcounter sc_project=sc_project sc_security=sc_security}}  
   </body>

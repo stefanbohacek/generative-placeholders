@@ -1,3 +1,18 @@
 .example{
   cursor: pointer;
 }
+
+.lazy-load{
+  opacity: 0;
+  transform: translate(0,30px) scale(1.05);
+}
+
+.lazy-loaded{
+  opacity: 1;
+  transform: translate(0,0) scale(1);
+}
+
+.lazy-load,
+.lazy-loaded{
+  transition: transform 0.2s, scale 0.3s, opacity 0.4s;
+}
