@@ -1,11 +1,14 @@
-const path = require('path'),
-      express = require('express'),
-      exphbs  = require('express-handlebars'),
-      bodyParser = require('body-parser'),
-      sassMiddleware = require('node-sass-middleware'),
-      babelify = require('express-babelify-middleware'),
-      helpers = require(__dirname + '/helpers/general.js'),
-      app = express();
+const path = require( 'path' ),
+      express = require( 'express' ),
+      compression = require( 'compression' ),
+      exphbs  = require( 'express-handlebars' ),
+      bodyParser = require( 'body-parser' ),
+      sassMiddleware = require( 'node-sass-middleware' ),
+      babelify = require( 'express-babelify-middleware' ),
+      helpers = require( __dirname + '/helpers/general.js' ),
+      app = express(  );
+
+app.use( compression() );
 
 app.use( sassMiddleware( {
   // debug: true,
@@ -14,11 +17,11 @@ app.use( sassMiddleware( {
   outputStyle: 'compressed'
 } ) );
 
-app.use(express.static('public'));
+app.use( express.static( 'public' ) );
 
-app.use(bodyParser.urlencoded({
+app.use( bodyParser.urlencoded( {
   extended: true
-}));
+} ) );
 
 app.use( bodyParser.json() );
 
