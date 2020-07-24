@@ -21,7 +21,8 @@
     "roughjs": "^2.2.4",
     "poisson-disc-sampler": "^1.1.0",
     "nice-color-palettes": "^3.0.0",
-    "compression": "^1.7.4"
+    "compression": "^1.7.4",
+    "sqlite3": "^4.2.0"
   },
   "engines": {
     "node": "8.x"
