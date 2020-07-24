@@ -13,6 +13,7 @@ dependencies:
   poisson-disc-sampler: 1.1.0
   request: 2.88.0
   roughjs: 2.2.5
+  sqlite3: 4.2.0
   underscore: 1.9.1
 packages:
   /@sindresorhus/is/0.14.0:
@@ -3179,6 +3180,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg==
+  /nan/2.14.1:
+    dev: false
+    resolution:
+      integrity: sha512-isWHgVjnFjh2x2yuJ/tj3JbwoHu3UC2dX5G/88Cm24yB6YopVgxvBObDY7n5xW6ExmFhJpSEQqFPvq9zaXc8Jw==
   /nanomatch/1.2.13:
     dependencies:
       arr-diff: 4.0.0
@@ -4383,6 +4388,14 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-NzNVhJDYpwceVVii8/Hu6DKfD2G+NrQHlS/V/qgv763EYudVwEcMQNxd2lh+0VrUByXN/oJkl5grOhYWvQUYiw==
+  /sqlite3/4.2.0:
+    dependencies:
+      nan: 2.14.1
+      node-pre-gyp: 0.11.0
+    dev: false
+    requiresBuild: true
+    resolution:
+      integrity: sha512-roEOz41hxui2Q7uYnWsjMOTry6TcNUNmp8audCx18gF10P2NknwdpF+E+HKvz/F2NvPKGGBF4NGc+ZPQ+AABwg==
   /sshpk/1.14.2:
     dependencies:
       asn1: 0.2.4
@@ -4981,4 +4994,5 @@ specifiers:
   poisson-disc-sampler: ^1.1.0
   request: ^2.88.0
   roughjs: ^2.2.4
+  sqlite3: ^4.2.0
   underscore: ^1.8.3

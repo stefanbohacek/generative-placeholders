@@ -35,6 +35,7 @@ app.set('view engine', 'handlebars');
 
 app.use('/', require('./routes/index.js'))
 app.use('/image', require('./routes/image.js'))
+app.use('/stats', require('./routes/stats.js'))
 
 app.get('/js/helpers.js', function (req, res) {
   res.sendFile(path.join(__dirname + '/helpers/general.js'));
