@@ -121,50 +121,46 @@ router.get( '/', function ( req, res )  {
     } );    
   }
 
-  const referer = req.headers.referer;
+//   const referer = req.headers.referer;
 
-  if ( req.query.style && referer && referer.indexOf( 'generative-placeholders.glitch.me' ) === -1 ){
-    const filePath = `${__dirname}/../.data/stats.json`,
-          date = new Date().toISOString().slice( 0, 10 ),
-          style = req.query.style;
+//   if ( req.query.style && referer && referer.indexOf( 'generative-placeholders.glitch.me' ) === -1 ){
+//     const filePath = `${__dirname}/../.data/stats.json`,
+//           date = new Date().toISOString().slice( 0, 10 ),
+//           style = req.query.style;
 
-    fs.readFile( filePath, 'utf8', function ( err, data ) {
-      if ( err || !data ){
-        console.log( 'error reading stats data:', err );
-        data = {};
-        data[date] = {};
-        data[date][style] = 1;
-        data[date]['all'] = 1;
-      } else {
-        try{
-          data = JSON.parse( data );
-          data[date] = data[date] || {};
-          data[date][style] = data[date][style] || 0;
-          data[date]['all'] = data[date]['all'] || 0;
+//     fs.readFile( filePath, 'utf8', function ( err, data ) {
+//       if ( err || !data ){
+//         console.log( 'error reading stats data:', err );
+//         data = {};
+//         data[date] = {};
+//         data[date][style] = 1;
+//         data[date]['all'] = 1;
+//       } else {
+//         try{
+//           data = JSON.parse( data );
+//           data[date] = data[date] || {};
+//           data[date][style] = data[date][style] || 0;
+//           data[date]['all'] = data[date]['all'] || 0;
 
-          console.log( 'stats data:', data );
+//           console.log( 'stats data:', data );
 
-          if ( data[date][style] ){
-            data[date][style]++;
-          } else {
-            data[date][style] = 1;
-          }
+//           if ( data[date][style] ){
+//             data[date][style]++;
+//           } else {
+//             data[date][style] = 1;
+//           }
 
-          data[date]['all']++;
+//           data[date]['all']++;
 
-        } catch( err ){ console.log( 'error parsing stats data:', err ) /* data = {}*/ }
+//         } catch( err ){ console.log( 'error parsing stats data:', err ) /* data = {}*/ }
         
-      }
+//       }
 
-      fs.writeFileSync( filePath, JSON.stringify( data, null, 2 ), 'utf8' );
+//       fs.writeFileSync( filePath, JSON.stringify( data, null, 2 ), 'utf8' );
       
-      // fs.writeFile( filePath, JSON.stringify( data, null, 2 ), 'utf8', function ( err ) {
-      //   if ( err ){
-      //     console.log( err );
-      //   }
-      // });
-    } );
-  }  
+      
+//     } );
+//   }  
 } );
 
 module.exports = router;
