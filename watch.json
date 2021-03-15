@@ -1,18 +1,13 @@
 {
   "install": {
-    "include": [
-      "^package\\.json$"
-    ]
+    "include": ["^package\\.json$"]
   },
   "restart": {
-    "exclude": [
-      "^public/",
-      "^dist/"
-    ],
+    "exclude": ["^public/", "^dist/"],
     "include": [
       "^src/",
-      "^routes/",      
-      "^helpers/",      
+      "^routes/",
+      "^helpers/",
       "\\.js$",
       "\\.scss$",
       "\\.handlebars$",
