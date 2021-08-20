@@ -33,6 +33,15 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'handlebars');
 
+app.use( function(req, res, next){
+  if ( req.headers['x-forwarded-proto'].indexOf( 'https' ) === -1 ){
+    return res.redirect( 'https://' + req.headers.host + req.url );
+  }
+  else{
+    return next();
+  }
+} );
+
 app.use('/', require('./routes/index.js'))
 app.use('/image', require('./routes/image.js'))
 app.use('/stats', require('./routes/stats.js'))
