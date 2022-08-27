@@ -6,7 +6,7 @@ const express = require( 'express' ),
 router.get( '/', function( req, res ) {
   res.render( '../views/home.handlebars', {
     project_name: process.env.PROJECT_DOMAIN,
-    header_scripts: process.env.HEADER_SCRIPTS,
+    head_scripts: process.env.HEAD_SCRIPTS,
     palettes: palettes,    
     timestamp: Date.now()
   } );
