@@ -1,7 +1,10 @@
-const express = require('express'),
-  fs = require('fs'),
-  palettes = require('nice-color-palettes'),      
-  router = express.Router();
+import express from "express";
+import { readFileSync } from 'fs';
+const palettes = JSON.parse(
+  readFileSync('./node_modules/nice-color-palettes/100.json', 'utf-8')
+);
+
+const router = express.Router();
 
 router.get('/', (req, res) => {
   res.render('../views/home.handlebars', {
@@ -12,4 +15,4 @@ router.get('/', (req, res) => {
   });
 });
 
-module.exports = router;
+export default router;

@@ -1,8 +1,7 @@
-var fs = require('fs'),
-    Canvas = require('canvas'),
-    helpers = require(__dirname + '/../helpers/general.js');
+import Canvas from "canvas";
+import helpers from "../helpers/general.js";
 
-module.exports = function(options, cb) {
+export default (options, cb) => {
   /* 
     Based on https://generativeartistry.com/tutorials/circle-packing/
   */

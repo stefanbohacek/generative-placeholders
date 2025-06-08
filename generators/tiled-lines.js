@@ -1,10 +1,9 @@
-var fs = require('fs'),
-    Canvas = require('canvas'),
-    img_path_png = './.data/temp.png',
-    img_path_gif = './.data/temp.gif',
-    helpers = require(__dirname + '/../helpers/general.js');
+import fs from "fs";
+import Canvas from "canvas";
+import helpers from "../helpers/general.js";
+const img_path_png = "./.data/temp.png";
 
-module.exports = function(options, cb) {
+export default (options, cb) => {
   /* 
     Based on http://generativeartistry.com/tutorials/tiled-lines/
   */

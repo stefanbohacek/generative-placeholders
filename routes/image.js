@@ -1,166 +1,134 @@
 /* Expose files saved in the data folder. */
 
-const express = require('express'),
-      fs = require('fs'),
-      router = express.Router(),
-      helpers = require(__dirname + '/../helpers/general.js'),
-      colors = require('nice-color-palettes'),
-      generators = {
-        cellular_automata: require(__dirname + '/../generators/cellular-automata.js'),
-        tiled_lines: require(__dirname + '/../generators/tiled-lines.js'),
-        circle_packing: require(__dirname + '/../generators/circle-packing.js'),
-        cubic_disarray: require(__dirname + '/../generators/cubic-disarray.js'),
-        joy_division: require(__dirname + '/../generators/joy-division.js'),
-        triangular_mesh: require(__dirname + '/../generators/triangular-mesh.js'),
-        un_deux_trois: require(__dirname + '/../generators/un-deux-trois.js'),
-        mondrian: require(__dirname + '/../generators/mondrian.js')        
-      },
-      dbFile = "./.data/sqlite.db",
-      exists = fs.existsSync(dbFile),
-      sqlite3 = require('sqlite3').verbose(),
-      db = new sqlite3.Database(dbFile);
-      
+import express from "express";
+import fs from "fs";
+import helpers from "../helpers/general.js";
+import sqlite3 from "sqlite3";
+import generator_cellular_automata from "../generators/cellular-automata.js";
+import generator_tiled_lines from "../generators/tiled-lines.js";
+import generator_circle_packing from "../generators/circle-packing.js";
+import generator_cubic_disarray from "../generators/cubic-disarray.js";
+import generator_joy_division from "../generators/joy-division.js";
+import generator_triangular_mesh from "../generators/triangular-mesh.js";
+import generator_un_deux_trois from "../generators/un-deux-trois.js";
+import generator_mondrian from "../generators/mondrian.js";
 
-function serveImage(res, error, img){
-   if (img && img.data){
+import { readFileSync } from "fs";
+const palettes = JSON.parse(
+  readFileSync("./node_modules/nice-color-palettes/100.json", "utf-8")
+);
 
-    var imgBuffer = new Buffer(img.data, 'base64');
+const generators = {
+  cellular_automata: generator_cellular_automata,
+  tiled_lines: generator_tiled_lines,
+  circle_packing: generator_circle_packing,
+  cubic_disarray: generator_cubic_disarray,
+  joy_division: generator_joy_division,
+  triangular_mesh: generator_triangular_mesh,
+  un_deux_trois: generator_un_deux_trois,
+  mondrian: generator_mondrian,
+};
+const router = express.Router();
+
+const serveImage = (res, error, img) => {
+  if (img && img.data) {
+    var imgBuffer = new Buffer(img.data, "base64");
     res.writeHead(200, {
-      'Content-Type': 'image/png',
-      'Content-Length': imgBuffer.length 
+      "Content-Type": "image/png",
+      "Content-Length": imgBuffer.length,
     });
     res.end(imgBuffer);
-   } else {
-    error = error || 'unknown server error'
-      res.end(error);
-   }   
-}
+  } else {
+    error = error || "unknown server error";
+    res.end(error);
+  }
+};
 
-router.get('/', function (req, res)  {
+router.get("/", (req, res) => {
   console.log(req.query);
 
   let width = 1200,
-      height = 720,
-      colorPalette = helpers.randomFromArray(colors);
+    height = 720,
+    colorPalette = helpers.randomFromArray(palettes);
 
-  if (req.query.colors){
+  if (req.query.colors) {
     const reqColors = parseInt(req.query.colors);
-    if (reqColors < colors.length){
-      colorPalette = colors[parseInt(req.query.colors)];
+    if (reqColors < palettes.length) {
+      colorPalette = palettes[parseInt(req.query.colors)];
     }
   }
 
-  if (req.query.width){
+  if (req.query.width) {
     const reqWidth = parseInt(req.query.width);
-    if (reqWidth > 0 && reqWidth <= 2000){
+    if (reqWidth > 0 && reqWidth <= 2000) {
       width = reqWidth;
     }
   }
-  
-  if (req.query.height){
+
+  if (req.query.height) {
     const reqHeight = parseInt(req.query.height);
-    if (reqHeight > 0 && reqHeight <= 2000){
+    if (reqHeight > 0 && reqHeight <= 2000) {
       height = reqHeight;
     }
   }
-  
+
   const options = {
-    style: req.query.style ? req.query.style : 'cellular-automata',
+    style: req.query.style ? req.query.style : "cellular-automata",
     width: width,
     height: height,
-    colors: colorPalette.map(function(color){ return color.replace('#', ''); })
-  }
-  
-  if (options.style === 'circles'){
-    generators.circle_packing(options, function(error, img){
-      serveImage(res, error, img);
-    });    
-  } else if (options.style === 'triangles'){
-    if (req.query.gap){
-      options.gap = parseInt(req.query.gap);
-    }
-    generators.triangular_mesh(options, function(error, img){
-      serveImage(res, error, img);
-    });    
-  } else if (options.style === 'tiles'){
-    /* Very slow! */
-    generators.tiled_lines(options, function(error, img){
+    colors: colorPalette.map((color) => {
+      return color.replace("#", "");
+    }),
+  };
+
+  if (options.style === "circles") {
+    generators.circle_packing(options, (error, img) => {
       serveImage(res, error, img);
     });
-  } else if (options.style === 'cellular-automata'){
-        
-    if (req.query.cells && parseInt(req.query.cells) > 0){
+  } else if (options.style === "triangles") {
+    if (req.query.gap) {
+      options.gap = parseInt(req.query.gap);
+    }
+    generators.triangular_mesh(options, (error, img) => {
+      serveImage(res, error, img);
+    });
+  } else if (options.style === "tiles") {
+    /* Very slow! */
+    generators.tiled_lines(options, (error, img) => {
+      serveImage(res, error, img);
+    });
+  } else if (options.style === "cellular-automata") {
+    if (req.query.cells && parseInt(req.query.cells) > 0) {
       options.cells = parseInt(req.query.cells);
-      if (options.cells > 200){
+      if (options.cells > 200) {
         options.cells = 200;
       }
     } else {
-      options.cells = helpers.getRandomInt(50, 100);  
+      options.cells = helpers.getRandomInt(50, 100);
     }
-    
-    generators.cellular_automata(options, function(error, img){
-      serveImage(res, error, img);
-    });
-  } else if (options.style === 'cubic-disarray'){
-    generators.cubic_disarray(options, function(error, img){
-      serveImage(res, error, img);
-    });
-  } else if (options.style === 'joy-division'){
-    generators.joy_division(options, function(error, img){
-      serveImage(res, error, img);
-    });
-  } else if (options.style === '123'){
-    generators.un_deux_trois(options, function(error, img){
-      serveImage(res, error, img);
-    });    
-  } else if (options.style === 'mondrian'){
-    options.colors = ['#D40920', '#1356A2', '#F7D842'];
 
-    generators.mondrian(options, function(error, img){
+    generators.cellular_automata(options, (error, img) => {
       serveImage(res, error, img);
-    });    
+    });
+  } else if (options.style === "cubic-disarray") {
+    generators.cubic_disarray(options, (error, img) => {
+      serveImage(res, error, img);
+    });
+  } else if (options.style === "joy-division") {
+    generators.joy_division(options, (error, img) => {
+      serveImage(res, error, img);
+    });
+  } else if (options.style === "123") {
+    generators.un_deux_trois(options, (error, img) => {
+      serveImage(res, error, img);
+    });
+  } else if (options.style === "mondrian") {
+    options.colors = ["#D40920", "#1356A2", "#F7D842"];
+
+    generators.mondrian(options, (error, img) => {
+      serveImage(res, error, img);
+    });
   }
-
-//   const referer = req.headers.referer;
-
-//   if (req.query.style && referer && referer.indexOf('generative-placeholders.glitch.me') === -1){
-//     const filePath = `${__dirname}/../.data/stats.json`,
-//           date = new Date().toISOString().slice(0, 10),
-//           style = req.query.style;
-
-//     fs.readFile(filePath, 'utf8', function (err, data) {
-//       if (err || !data){
-//         console.log('error reading stats data:', err);
-//         data = {};
-//         data[date] = {};
-//         data[date][style] = 1;
-//         data[date]['all'] = 1;
-//       } else {
-//         try{
-//           data = JSON.parse(data);
-//           data[date] = data[date] || {};
-//           data[date][style] = data[date][style] || 0;
-//           data[date]['all'] = data[date]['all'] || 0;
-
-//           console.log('stats data:', data);
-
-//           if (data[date][style]){
-//             data[date][style]++;
-//           } else {
-//             data[date][style] = 1;
-//           }
-
-//           data[date]['all']++;
-
-//         } catch(err){ console.log('error parsing stats data:', err) /* data = {}*/ }
-        
-//       }
-
-//       fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
-      
-      
-//     });
-//   }  
 });
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const helpers = {
+export default {
   ready: function(fn) {
     if (document.attachEvent ? document.readyState === 'complete' : document.readyState !== 'loading'){
       fn();
@@ -120,7 +120,3 @@ const helpers = {
   }  
 };
 
-if (typeof module !== 'undefined'){
-  /* This is to make the file usable both in node and on the front end. */
-  module.exports = helpers;
-}
