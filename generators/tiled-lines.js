@@ -8,7 +8,7 @@ export default (options, cb) => {
     Based on http://generativeartistry.com/tutorials/tiled-lines/
   */
   console.log('drawing lines...');
-  var width = options.width || 1184,
+  let width = options.width || 1184,
       height = options.height || 506,
       colors = options.colors || ['000', 'fff'],
       canvas = Canvas.createCanvas(width, height),
@@ -19,10 +19,10 @@ export default (options, cb) => {
   ctx.strokeStyle = `#${colors[1]}`;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  var step = helpers.getRandomInt(15,25);
+  let step = helpers.getRandomInt(15,25);
 
   function draw(x, y, width, height) {
-    var leftToRight = Math.random() >= 0.5;
+    let leftToRight = Math.random() >= 0.5;
 
     if( leftToRight ) {
       ctx.moveTo(x, y);
@@ -35,8 +35,8 @@ export default (options, cb) => {
     ctx.stroke();
   }
 
-  for( var x = 0; x < width; x += step) {
-    for( var y = 0; y < height; y+= step ) {
+  for( let x = 0; x < width; x += step) {
+    for( let y = 0; y < height; y+= step ) {
       draw(x, y, step, step);
     }
   }

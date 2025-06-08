@@ -30,8 +30,8 @@ export default (options, cb) => {
   canvas.height = height;
   ctx.lineWidth = 8;
 
-  var step = size / 7;
-  var white = '#F2F5F1';
+  let step = size / 7;
+  let white = '#F2F5F1';
 
   function splitSquaresWith(coordinates) {
     const { x, y } = coordinates;

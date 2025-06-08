@@ -7,7 +7,7 @@ export default (options, cb) => {
   */
   console.log("evolving cells...");
 
-  var width = options.width || 1184,
+  let width = options.width || 1184,
     height = options.height || 506,
     size = width,
     colors = options.colors || ["000", "fff"],

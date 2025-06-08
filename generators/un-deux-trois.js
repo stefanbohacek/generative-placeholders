@@ -10,7 +10,7 @@ export default (options, cb) => {
 
   console.log('un, duex, trois...');
 
-  var width = options.width || 1184,
+  let width = options.width || 1184,
       height = options.height || 506,
       colors = options.colors || ['000', 'fff'],
       canvas = Canvas.createCanvas(width, height),
@@ -22,8 +22,8 @@ export default (options, cb) => {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.lineCap = 'round';
 
-  var step = helpers.getRandomInt(15,25);
-  var aThirdOfHeight = height/3;
+  let step = helpers.getRandomInt(15,25);
+  let aThirdOfHeight = height/3;
 
   function draw(x, y, width, height, positions) {
     ctx.save();
@@ -31,7 +31,7 @@ export default (options, cb) => {
     ctx.rotate(Math.random() * 5);
     ctx.translate(-width/2, -height/2)
 
-    for(var i = 0; i <= positions.length; i++) {
+    for(let i = 0; i <= positions.length; i++) {
       ctx.beginPath();
       ctx.moveTo(positions[i] * width, 0);
       ctx.lineTo(positions[i] * width, height);
@@ -41,8 +41,8 @@ export default (options, cb) => {
     ctx.restore();
   }
 
-  for( var y = step; y < width - step; y += step) {
-    for( var x = step; x < width - step; x+= step ) {
+  for( let y = step; y < width - step; y += step) {
+    for( let x = step; x < width - step; x+= step ) {
       if( y < aThirdOfHeight) {
         draw(x, y, step, step, [0.5]);   
       } else if ( y < aThirdOfHeight * 2) {

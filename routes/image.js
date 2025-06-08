@@ -32,7 +32,7 @@ const router = express.Router();
 
 const serveImage = (res, error, img) => {
   if (img && img.data) {
-    var imgBuffer = new Buffer(img.data, "base64");
+    let imgBuffer = new Buffer(img.data, "base64");
     res.writeHead(200, {
       "Content-Type": "image/png",
       "Content-Length": imgBuffer.length,

@@ -7,7 +7,7 @@ export default (options, cb) => {
   */
   console.log('packing circles...');
 
-  var width = options.width || 1184,
+  let width = options.width || 1184,
       height = options.height || 506,
       size = width,
       colors = options.colors || ['000', 'fff'],
@@ -19,19 +19,19 @@ export default (options, cb) => {
   ctx.strokeStyle = `#${colors[1]}`;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  var circles = [];
-  var minRadius = 2;
-  var maxRadius = 100;
-  var totalCircles = 500;
+  let circles = [];
+  let minRadius = 2;
+  let maxRadius = 100;
+  let totalCircles = 500;
   
-  var createCircleAttempts = 500;
+  let createCircleAttempts = 500;
 
   function doesCircleHaveACollision(circle) {
-    for(var i = 0; i < circles.length; i++) {
-      var otherCircle = circles[i];
-      var a = circle.radius + otherCircle.radius;
-      var x = circle.x - otherCircle.x;
-      var y = circle.y - otherCircle.y;
+    for(let i = 0; i < circles.length; i++) {
+      let otherCircle = circles[i];
+      let a = circle.radius + otherCircle.radius;
+      let x = circle.x - otherCircle.x;
+      let y = circle.y - otherCircle.y;
 
       if (a >= Math.sqrt((x*x) + (y*y))) {
         return true;
@@ -53,9 +53,9 @@ export default (options, cb) => {
 
   function createAndDrawCircle() {
 
-    var newCircle;
-    var circleSafeToDraw = false;
-    for( var tries = 0; tries < createCircleAttempts; tries++) {
+    let newCircle;
+    let circleSafeToDraw = false;
+    for( let tries = 0; tries < createCircleAttempts; tries++) {
       newCircle = {
         x: Math.floor(Math.random() * width),
         y: Math.floor(Math.random() * height),
@@ -74,7 +74,7 @@ export default (options, cb) => {
       return;
     }
 
-    for(var radiusSize = minRadius; radiusSize < maxRadius; radiusSize++) {
+    for(let radiusSize = minRadius; radiusSize < maxRadius; radiusSize++) {
       newCircle.radius = radiusSize;
       if(doesCircleHaveACollision(newCircle)){
         newCircle.radius--
@@ -88,7 +88,7 @@ export default (options, cb) => {
     ctx.stroke(); 
   }
 
-  for( var i = 0; i < totalCircles; i++ ) {  
+  for( let i = 0; i < totalCircles; i++ ) {  
     createAndDrawCircle();
   }
 
